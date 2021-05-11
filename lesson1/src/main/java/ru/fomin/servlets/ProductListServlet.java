@@ -1,7 +1,10 @@
 package ru.fomin.servlets;
 
-
-import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ru.fomin.config.AppConfig;
+import ru.fomin.service.ProductService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +16,19 @@ import java.io.IOException;
 @WebServlet(name = "productList", urlPatterns = "/products")
 public class ProductListServlet extends HttpServlet {
 
+    private ProductService productService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().print(productService.getTableOfProducts());
     }
 
+
+    @Override
+    public void init() throws ServletException {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        productService = applicationContext.getBean(ProductService.class);
+    }
 }
