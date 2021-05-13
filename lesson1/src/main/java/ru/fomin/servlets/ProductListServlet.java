@@ -1,7 +1,6 @@
 package ru.fomin.servlets;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.fomin.config.AppConfig;
 import ru.fomin.service.ProductService;
