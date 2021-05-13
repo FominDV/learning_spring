@@ -17,6 +17,7 @@ import java.io.IOException;
 public class ProductListServlet extends HttpServlet {
 
     private ProductService productService;
+    private AnnotationConfigApplicationContext applicationContext;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,10 +26,14 @@ public class ProductListServlet extends HttpServlet {
         resp.getWriter().print(productService.getTableOfProducts());
     }
 
+    @Override
+    public void destroy() {
+        applicationContext.close();
+    }
 
     @Override
     public void init() throws ServletException {
-        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         productService = applicationContext.getBean(ProductService.class);
     }
 }
