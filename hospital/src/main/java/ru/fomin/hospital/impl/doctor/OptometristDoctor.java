@@ -1,6 +1,5 @@
 package ru.fomin.hospital.impl.doctor;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -10,7 +9,6 @@ import ru.fomin.model.Patient;
 import ru.fomin.model.enumeration.DiseaseEnum;
 import ru.fomin.model.enumeration.SymptomEnum;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Component("optometrist")
@@ -20,8 +18,9 @@ public class OptometristDoctor extends Doctor {
     public void heal(Patient patient) {
         if (getDisease(patient.getSymptom()) == DiseaseEnum.BLINDNESS) {
             patient.printPatientInfo();
+        } else {
+            super.heal(patient);
         }
-        super.heal(patient);
     }
 
     @Override
@@ -31,10 +30,4 @@ public class OptometristDoctor extends Doctor {
         super.setSymptomToDiseaseMap(symptomToDiseaseMap);
     }
 
-    //@Resource(name = "optometristMap")
-//    @Autowired
-//    @Qualifier("optometristMap")
-//    public void setSymptomToDiseaseMap(Map<SymptomEnum, DiseaseEnum> symptomToDiseaseMap) {
-//        super.setSymptomToDiseaseMap(symptomToDiseaseMap);
-//    }
 }

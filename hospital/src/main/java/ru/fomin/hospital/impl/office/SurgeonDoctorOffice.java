@@ -11,8 +11,9 @@ public class SurgeonDoctorOffice extends DoctorOffice {
 
     @Autowired
     @Override
-    @Qualifier("optometrist")
+    @Qualifier("surgeon")
     public void setDoctor(Doctor doctor) {
         super.setDoctor(doctor);
     }
+
 }

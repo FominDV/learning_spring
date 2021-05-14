@@ -14,7 +14,7 @@ public class Patient {
     boolean isSick = true;
 
     public void printPatientInfo() {
-        System.out.printf("Patient %s is %s\n", name, isSick() ? "healthy" : "sick");
+        System.out.printf("Patient %s is %s\n\n", name, isSick() ? "sick" : "healthy");
     }
 
 }
