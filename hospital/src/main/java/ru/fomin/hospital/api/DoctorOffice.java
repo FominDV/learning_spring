@@ -1,16 +1,22 @@
 package ru.fomin.hospital.api;
 
+import lombok.Setter;
 import ru.fomin.model.Patient;
 import ru.fomin.model.enumeration.DiseaseEnum;
 
-import java.util.ArrayList;
-import java.util.List;
+@Setter
+public abstract class DoctorOffice {
 
-public interface DoctorOffice {
+    private Doctor doctor;
 
-    void showToDoctor(Patient patient);
+    public void showToDoctor(Patient patient) {
+        DiseaseEnum disease = doctor.getDisease(patient.getSymptom());
+        printDiagnosis(patient, disease);
+        doctor.heal(patient);
 
-    default void printDiagnosis(Patient patient, DiseaseEnum disease){
+    }
+
+    private void printDiagnosis(Patient patient, DiseaseEnum disease) {
         System.out.printf(
                 "Patient %s is sick by %s.\nHim symptom is %s.\n",
                 patient.getName(),

@@ -8,8 +8,13 @@ import ru.fomin.model.enumeration.SymptomEnum;
 @Data(staticConstructor = "of")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Patient {
+
     final String name;
     final SymptomEnum symptom;
-
     boolean isSick = true;
+
+    public void printPatientInfo() {
+        System.out.printf("Patient %s is %s\n", name, isSick() ? "healthy" : "sick");
+    }
+
 }

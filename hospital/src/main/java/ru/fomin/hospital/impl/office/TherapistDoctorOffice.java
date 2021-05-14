@@ -1,14 +1,18 @@
 package ru.fomin.hospital.impl.office;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import ru.fomin.hospital.api.Doctor;
 import ru.fomin.hospital.api.DoctorOffice;
-import ru.fomin.model.Patient;
 
 @Component("therapistOffice")
-public class TherapistDoctorOffice implements DoctorOffice {
+public class TherapistDoctorOffice extends DoctorOffice {
 
+    @Autowired
     @Override
-    public void showToDoctor(Patient patient) {
-
+    @Qualifier("optometrist")
+    public void setDoctor(Doctor doctor) {
+        super.setDoctor(doctor);
     }
 }

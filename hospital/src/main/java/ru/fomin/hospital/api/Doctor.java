@@ -1,17 +1,26 @@
 package ru.fomin.hospital.api;
 
+import lombok.AccessLevel;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 import ru.fomin.model.Patient;
 import ru.fomin.model.enumeration.DiseaseEnum;
 import ru.fomin.model.enumeration.SymptomEnum;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public interface Doctor {
+@Setter
+public abstract class Doctor {
 
-   Map<SymptomEnum, DiseaseEnum> symptomToDiseaseMap = new HashMap<>();
+    private Map<SymptomEnum, DiseaseEnum> symptomToDiseaseMap;
 
-   void heal(Patient patient);
-   DiseaseEnum getDisease(SymptomEnum symptom);
+    public void heal(Patient patient) {
+        patient.setSick(false);
+        patient.printPatientInfo();
+    }
+
+    public DiseaseEnum getDisease(SymptomEnum symptom) {
+        return symptomToDiseaseMap.get(symptom);
+    }
 
 }
