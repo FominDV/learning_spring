@@ -7,7 +7,6 @@ import ru.fomin.hospital.api.Reception;
 import ru.fomin.model.Patient;
 import ru.fomin.model.enumeration.SymptomEnum;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 @Component
