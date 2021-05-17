@@ -1,6 +1,7 @@
 package ru.fomin;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import ru.fomin.model.Patient;
 import ru.fomin.model.enumeration.SymptomEnum;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,17 +22,18 @@ public class Main {
 
     private final Reception reception;
 
+    @Value("#{'${patient.name}'.split(',')}")
+    private List<String> patientNameList;
+
     @PostConstruct
     public void init() {
-        patientList = List.of(
-                Patient.of("Dima", SymptomEnum.EYE_PAIN),
-                Patient.of("Mike", SymptomEnum.EYE_PAIN),
-                Patient.of("Tom", SymptomEnum.INABILITY_TO_SEE),
-                Patient.of("Sasha", SymptomEnum.LEG_PAIN),
-                Patient.of("Sara", SymptomEnum.BIG_PIMPLE),
-                Patient.of("Gendalf", SymptomEnum.TEMPERATURE),
-                Patient.of("Frodo", SymptomEnum.HIGH_TEMPERATURE)
-        );
+        patientList = new ArrayList<>(patientNameList.size());
+        SymptomEnum[] symptomArr = SymptomEnum.values();
+        for (int i = 0; i < patientNameList.size(); i++) {
+            String patientName = patientNameList.get(i);
+            SymptomEnum symptom = symptomArr.length > i ? symptomArr[i] : symptomArr[i % symptomArr.length];
+            patientList.add(Patient.of(patientName, symptom));
+        }
         System.out.printf("%d patients have come to reception\n\n", patientList.size());
     }
 

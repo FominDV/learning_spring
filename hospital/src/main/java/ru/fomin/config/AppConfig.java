@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import ru.fomin.hospital.api.DoctorOffice;
 import ru.fomin.model.enumeration.DiseaseEnum;
 import ru.fomin.model.enumeration.SymptomEnum;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 @Configuration
 @ComponentScan("ru.fomin")
+@PropertySource("patient.properties")
 @RequiredArgsConstructor
 public class AppConfig {
 
