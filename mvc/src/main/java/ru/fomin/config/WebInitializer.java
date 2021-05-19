@@ -9,7 +9,7 @@ import javax.servlet.Filter;
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{AppConfig.class};
     }
 
     @Override
@@ -26,9 +26,10 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     protected Filter[] getServletFilters() {
         // Создание фильтра кодировки, который позволит работать с русскими
         // символами
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter("/*");
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
+
         // Создание фильтра, который добавляет поддержку HTTP-методов (например
         // таких, как PUT), необходимых для REST API
         HiddenHttpMethodFilter httpMethodFilter = new HiddenHttpMethodFilter();

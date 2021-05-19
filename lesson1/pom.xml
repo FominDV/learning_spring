@@ -53,7 +53,7 @@
     </dependencies>
 
     <build>
-        <finalName>lesson1</finalName>
+        <finalName>mvc</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
