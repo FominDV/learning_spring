@@ -1,29 +1,47 @@
 package ru.fomin.config;
 
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
 
 @EnableWebMvc
 @Configuration
 @ComponentScan("ru.fomin")
+@RequiredArgsConstructor
 public class AppConfig implements WebMvcConfigurer {
+
+    private final ApplicationContext applicationContext;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-       // registry.addResourceHandler("WEB-INF/templates/**").addResourceLocations("/WEB-INF.templates/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.viewResolver(thymeleafViewResolver());
     }
 
     @Bean
+    @Primary
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/templates/");
+        templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setPrefix("classpath:/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
         return templateResolver;
     }
 
@@ -31,8 +49,11 @@ public class AppConfig implements WebMvcConfigurer {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
     }
+
+
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
@@ -40,4 +61,5 @@ public class AppConfig implements WebMvcConfigurer {
         thymeleafViewResolver.setCharacterEncoding("UTF-8");
         return thymeleafViewResolver;
     }
+
 }
