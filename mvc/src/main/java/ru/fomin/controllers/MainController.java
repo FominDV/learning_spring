@@ -1,4 +1,4 @@
-package ru.fomin.controller;
+package ru.fomin.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
