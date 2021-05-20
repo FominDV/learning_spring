@@ -26,7 +26,7 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("classpath:/resources/**").addResourceLocations("classpath:/resources/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/resources/");
     }
 
     @Override

@@ -15,9 +15,6 @@
 <div class="btn btn-dark">
     <a th:href="@{/}">Move to main menu</a>
 </div>
-<div class="btn btn-dark">
-    <a th:href="@{/product}">Move to catalog</a>
-</div>
 <div class="container">
     <h2 style="color: blue" th:if="${products.isEmpty()}">No products available</h2>
     <table class="table" th:unless="${products.isEmpty()}">
