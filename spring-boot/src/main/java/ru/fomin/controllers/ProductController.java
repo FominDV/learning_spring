@@ -1,6 +1,5 @@
 package ru.fomin.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.fomin.model.Product;
 import ru.fomin.services.IProductService;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
@@ -22,7 +20,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping
+    @RequestMapping
     public String getProducts(Model model) {
         List<Product> productList = productService.getProducts();
         model.addAttribute("products", productList);
@@ -37,7 +35,7 @@ public class ProductController {
     }
 
     @GetMapping("/remove/{id}")
-    public String removeProduct(@PathVariable(name = "id") Long id) throws FileNotFoundException {
+    public String removeProduct(@PathVariable(name = "id") Long id){
         productService.delete(id);
         return "redirect:/product";
     }
@@ -51,7 +49,7 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String saveProduct(Model model, @ModelAttribute Product product) {
+    public String saveProduct(Model model, Product product) {
         if (!(productService.updateProduct(product) || productService.createProduct(product))) {
             model.addAttribute("header", "Fix");
             return "manipulation";
