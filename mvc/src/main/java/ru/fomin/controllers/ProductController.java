@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.fomin.model.Product;
 import ru.fomin.services.IProductService;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
@@ -37,7 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("/remove/{id}")
-    public String removeProduct(@PathVariable(name = "id") Long id) throws FileNotFoundException {
+    public String removeProduct(@PathVariable(name = "id") Long id) {
         productService.delete(id);
         return "redirect:/product";
     }
