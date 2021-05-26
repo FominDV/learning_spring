@@ -13,21 +13,21 @@ import java.util.Optional;
 @Component
 public class ProductServiceImpl implements IProductService {
 
-    private IDao productRepository;
+    private IDao productDao;
 
     @Autowired
-    public void setProductRepository(IDao productRepository) {
-        this.productRepository = productRepository;
+    public void setProductDao(IDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
     public Optional<Product> getProduct(Long id) throws HttpClientErrorException.NotFound {
-        return productRepository.findById(id);
+        return productDao.findById(id);
     }
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productDao.findAll();
     }
 
     public boolean createProduct(Product product) {
@@ -37,7 +37,7 @@ public class ProductServiceImpl implements IProductService {
                 product.getTitle().isEmpty()) {
             return false;
         }
-        productRepository.saveOrUpdate(product);
+        productDao.saveOrUpdate(product);
         return true;
     }
 
@@ -47,12 +47,12 @@ public class ProductServiceImpl implements IProductService {
         if(!productList.contains(product)){
             return false;
         }
-        productRepository.saveOrUpdate(product);
+        productDao.saveOrUpdate(product);
         return true;
     }
 
     @Override
     public void delete(Long id) throws HttpClientErrorException.NotFound {
-        productRepository.delete(id);
+        productDao.delete(id);
     }
 }

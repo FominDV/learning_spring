@@ -10,12 +10,11 @@ services:
     container_name: mvc-postgres
     volumes:
       - type: volume
-        source: mvc-postgres
         target: /var/lib/postgresql/dataConfig
     environment:
-      POSTGRES_DB: spring-mvc
+      POSTGRES_DB: spring-mvc1
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qwerty12345
+      POSTGRES_PASSWORD: cd
     ports:
       - 5434:5432
 

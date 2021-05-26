@@ -11,9 +11,9 @@ import ru.fomin.config.AppConfig;
 
 public class Launcher {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/spring-mvc";
+    private static final String url = "jdbc:postgresql://localhost:5434/spring-mvc1";
     private static final String user = "postgres";
-    private static final String password = "Pfrjcvjltcfyn1992";
+    private static final String password = "qwerty";
 
     public static void main(String[] args) throws Exception {
 

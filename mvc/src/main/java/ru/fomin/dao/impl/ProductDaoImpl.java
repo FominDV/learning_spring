@@ -1,70 +1,59 @@
 package ru.fomin.dao.impl;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.fomin.model.Product;
 import ru.fomin.dao.IDao;
+import ru.fomin.model.Product;
 
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
-@Component("productRepository")
+@Component("productDao")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductDaoImpl implements IDao<Product, Long> {
 
-    private Map<Long, Product> productMap;
-    private static Long idCounter = 1L;
+    TransactionalExecutor transactionalExecutor;
 
-    @PostConstruct
-    public void init() {
-        Long currentId;
-        productMap = new HashMap<>();
-        productMap.put(currentId = generateId(), Product.builder()
-                .id(currentId)
-                .title("tomato")
-                .price(65.00)
-                .description("It is very healthy red vegetable")
-                .build());
-        productMap.put((currentId = generateId()), Product.builder()
-                .id(currentId)
-                .title("bread")
-                .price(25.2)
-                .description("It contains many fiber")
-                .build());
-        productMap.put((currentId = generateId()), Product.builder()
-                .id(currentId)
-                .title("milk")
-                .price(100.5)
-                .description("It has many calcium and protein")
-                .build());
+    @Autowired
+    public void setTransactionalExecutor(TransactionalExecutor transactionalExecutor) {
+        this.transactionalExecutor = transactionalExecutor;
     }
 
     @Override
     public List<Product> findAll() {
-        return List.copyOf(productMap.values());
+        return transactionalExecutor.executeTransaction(
+                session -> session.createQuery("FROM Product").list()
+        );
     }
 
     @Override
     public Optional<Product> findById(Long id) {
-        return productMap.containsKey(id) ? Optional.of(productMap.get(id)) : Optional.empty();
+        return transactionalExecutor.executeTransaction(
+                session -> Optional.of(session.get(Product.class, id))
+        );
     }
 
     @Override
     public Product saveOrUpdate(Product model) {
-        Long id = model.getId() == null ? generateId() : model.getId();
-        model.setId(id);
-        productMap.put(id, model);
-        return null;
+        return (Product) transactionalExecutor.executeTransaction(
+                session -> session.merge(model)
+        );
     }
 
     @Override
     public void delete(Long id) {
-
+        transactionalExecutor.executeTransaction(
+                session -> {
+                    Query query = session.createQuery("DELETE FROM Product WHERE id=:id")
+                            .setParameter("id", id);
+                    query.executeUpdate();
+                    return null;
+                }
+        );
     }
 
-    private Long generateId() {
-        return idCounter++;
-    }
 }
