@@ -15,6 +15,6 @@ public interface IProductService {
 
     boolean updateProduct(Product product);
 
-    boolean delete(Long id);
+    void delete(Long id);
 
 }

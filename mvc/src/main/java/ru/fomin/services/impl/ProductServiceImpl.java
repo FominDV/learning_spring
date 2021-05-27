@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import ru.fomin.model.Product;
-import ru.fomin.repositories.IRepository;
+import ru.fomin.dao.IDao;
 import ru.fomin.services.IProductService;
 
 import java.util.List;
@@ -13,31 +13,31 @@ import java.util.Optional;
 @Component
 public class ProductServiceImpl implements IProductService {
 
-    private IRepository productRepository;
+    private IDao productDao;
 
     @Autowired
-    public void setProductRepository(IRepository productRepository) {
-        this.productRepository = productRepository;
+    public void setProductDao(IDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
     public Optional<Product> getProduct(Long id) throws HttpClientErrorException.NotFound {
-        return productRepository.findById(id);
+        return productDao.findById(id);
     }
 
     @Override
     public List<Product> getProducts() {
-        return productRepository.findAll();
+        return productDao.findAll();
     }
 
     public boolean createProduct(Product product) {
-        if (product.getCost() == null ||
-                product.getCost() <= 0 ||
+        if (product.getPrice() == null ||
+                product.getPrice() <= 0 ||
                 product.getDescription().isEmpty() ||
                 product.getTitle().isEmpty()) {
             return false;
         }
-        productRepository.save(product);
+        productDao.saveOrUpdate(product);
         return true;
     }
 
@@ -47,12 +47,12 @@ public class ProductServiceImpl implements IProductService {
         if(!productList.contains(product)){
             return false;
         }
-        productRepository.save(product);
+        productDao.saveOrUpdate(product);
         return true;
     }
 
     @Override
-    public boolean delete(Long id) throws HttpClientErrorException.NotFound {
-       return productRepository.delete(id);
+    public void delete(Long id) throws HttpClientErrorException.NotFound {
+        productDao.delete(id);
     }
 }

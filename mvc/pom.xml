@@ -17,6 +17,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <spring.version>5.2.0.RELEASE</spring.version>
         <jetty.version>9.2.26.v20180806</jetty.version>
+        <org.flywaydb>7.7.3</org.flywaydb>
     </properties>
 
     <dependencies>
@@ -75,6 +76,23 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!--DB-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.4.28.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1200-jdbc41</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${org.flywaydb}</version>
         </dependency>
 
     </dependencies>
