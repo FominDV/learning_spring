@@ -1,12 +1,12 @@
 package ru.fomin.service;
 
-import ru.fomin.entity.ProductEn;
-import ru.fomin.model.Product;
+import ru.fomin.domain.Product;
+import ru.fomin.domain.ProductFilter;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProductsByFilter();
+    List<Product> getProductsByFilter(ProductFilter productFilter);
 
 }

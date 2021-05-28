@@ -1,4 +1,4 @@
-package ru.fomin.model;
+package ru.fomin.domain;
 
 import lombok.AccessLevel;
 import lombok.Builder;

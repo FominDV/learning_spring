@@ -1,8 +1,9 @@
 package ru.fomin.service.impl;
 
 import org.springframework.stereotype.Service;
+import ru.fomin.domain.ProductFilter;
 import ru.fomin.entity.ProductEn;
-import ru.fomin.model.Product;
+import ru.fomin.domain.Product;
 import ru.fomin.repository.ProductRepository;
 import ru.fomin.service.ProductService;
 
@@ -17,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public List<Product> getProductsByFilter() {
+    public List<Product> getProductsByFilter(ProductFilter productFilter) {
         List<ProductEn> productEnList = productRepository.findAll();
         return convertToProductList(productEnList);
     }
