@@ -20,3 +20,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/spring-data2
     username: postgres
     password: Pfrjcvjltcfyn1992
+
+pageSize: 5
