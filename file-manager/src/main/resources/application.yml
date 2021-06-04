@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /file
+  port: 8080
+spring:
+  datasource:
+    username: postgres
+    password: Pfrjcvjltcfyn1992
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/file-m
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+# директория хранения загружаемых файлов
+store:
+  folder: /store
