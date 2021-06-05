@@ -7,7 +7,7 @@ spring:
     username: postgres
     password: Pfrjcvjltcfyn1992
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/file-m
+    url: jdbc:postgresql://localhost:5432/file-m2
   jpa:
     show-sql: true
     hibernate:

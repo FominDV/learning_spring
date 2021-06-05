@@ -1,9 +1,13 @@
 package ru.fomin.filemanager.entiries;
 
-import lombok.*;
-import org.hibernate.annotations.Type;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -26,5 +30,12 @@ public class FileMeta {
 
     @Column(name = "sub_type")
     private int subType;
+
+    @CreationTimestamp
+    @Column(name = "time_creation")
+    private LocalDateTime createAt;
+
+    @Column(name = "file_size")
+    private int size; //bytes
 
 }

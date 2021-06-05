@@ -30,11 +30,13 @@ public class FileStoreService implements IFileStoreService {
 
         String filename = fileMetaRepository.checkFileExists(md5);
         if (filename == null) {
-            fileMetaRepository.save(FileMeta.builder()
+            FileMeta fileMeta = FileMeta.builder()
                     .hash(md5)
                     .fileName(fileName)
                     .subType(subFileType)
-                    .build());
+                    .size(content.length)
+                    .build();
+            fileMetaRepository.save(fileMeta);
             filename = systemProvider.storeFile(content, md5, fileName);
         }
 
