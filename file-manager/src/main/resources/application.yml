@@ -1,6 +1,8 @@
 server:
   servlet:
     context-path: /file
+    encoding:
+      charset: UTF-8
   port: 8080
 spring:
   datasource:
@@ -14,6 +16,7 @@ spring:
       ddl-auto: none
   flyway:
     enabled: true
-# директория хранения загружаемых файлов
+
 store:
   folder: /store
+  zip: files.zip

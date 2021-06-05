@@ -5,20 +5,23 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import ru.fomin.filemanager.domain.FileData;
 import ru.fomin.filemanager.services.IFileStoreService;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
-@Controller
-@CrossOrigin
+@RestController
+@Validated
 public class FileController {
 
     @Autowired
@@ -39,15 +42,18 @@ public class FileController {
     }
 
     @GetMapping("/getfile")
-    public ResponseEntity<Resource> downloadFile(@RequestParam("hash") UUID hash) throws IOException {
-        byte[] array = fileStoreService.getFile(hash);
+    public ResponseEntity<Resource> downloadFile(
+            @RequestParam(value = "hash") @NotEmpty List<UUID> hashList) throws IOException {
+        FileData fileData = fileStoreService.getFiles(hashList);
         return ResponseEntity.ok()
+                .header("content-disposition", String.format("attachment; filename = \"%s\"", fileData.getFileName()))
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(new ByteArrayResource(array));
+                .body(new ByteArrayResource(fileData.getBytes()));
     }
 
     @GetMapping("/getfiles")
-    public ResponseEntity<?> getFiles(@RequestParam("subtype") int subtype) throws IOException {
+    public ResponseEntity<?> getFiles(@RequestParam("subtype") int subtype) {
         return ResponseEntity.ok(fileStoreService.getMetaFiles(subtype));
     }
+
 }
