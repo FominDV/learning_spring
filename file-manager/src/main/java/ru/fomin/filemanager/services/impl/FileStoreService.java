@@ -71,6 +71,7 @@ public class FileStoreService implements IFileStoreService {
             for (UUID md5 : md5List) {
                 writeToZipOutputStream(md5, zipOutputStream);
             }
+            zipOutputStream.finish();
             return FileData.builder()
                     .fileName(zipName)
                     .bytes(byteArrayOutputStream.toByteArray())
