@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import ru.fomin.filemanager.domain.FileData;
+import ru.fomin.filemanager.entiries.FileMeta;
 import ru.fomin.filemanager.services.IFileStoreService;
 
 import javax.validation.constraints.NotEmpty;
@@ -28,17 +29,17 @@ public class FileController {
     IFileStoreService fileStoreService;
 
     @PostMapping("/storefile")
-    public ResponseEntity<String> uploadFile(
+    public ResponseEntity<?> uploadFile(
             @RequestParam("file") MultipartFile file,
-            @RequestParam("subtype") int subType
+            @RequestParam(value = "subtype", required = false, defaultValue = "1") int subType
     ) throws IOException, NoSuchAlgorithmException {
 
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("File is Empty");
         }
 
-        String hash = fileStoreService.storeFile(file.getBytes(), file.getOriginalFilename(), subType);
-        return ResponseEntity.ok(hash);
+        FileMeta fileMeta = fileStoreService.storeFile(file.getBytes(), file.getOriginalFilename(), subType);
+        return ResponseEntity.ok(fileMeta);
     }
 
     @GetMapping("/getfile")
@@ -52,7 +53,7 @@ public class FileController {
     }
 
     @GetMapping("/getfiles")
-    public ResponseEntity<?> getFiles(@RequestParam("subtype") int subtype) {
+    public ResponseEntity<?> getFiles(@RequestParam(value = "subtype", required = false, defaultValue = "-1") int subtype) {
         return ResponseEntity.ok(fileStoreService.getMetaFiles(subtype));
     }
 

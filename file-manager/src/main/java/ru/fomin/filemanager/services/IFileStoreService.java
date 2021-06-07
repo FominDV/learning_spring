@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface IFileStoreService {
 
-    String storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException;
+    FileMeta storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException;
 
     FileData getFiles(List<UUID> md5List) throws IOException;
 

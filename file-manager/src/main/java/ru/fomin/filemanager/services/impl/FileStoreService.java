@@ -34,22 +34,10 @@ public class FileStoreService implements IFileStoreService {
     String zipName;
 
     @Override
-    public String storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException {
-        final UUID md5 = HashHelper.getMd5Hash(content);
-
-        String filename = fileMetaRepository.checkFileExists(md5);
-        if (filename == null) {
-            FileMeta fileMeta = FileMeta.builder()
-                    .hash(md5)
-                    .fileName(fileName)
-                    .subType(subFileType)
-                    .size(content.length)
-                    .build();
-            fileMetaRepository.save(fileMeta);
-            filename = systemProvider.storeFile(content, md5, fileName);
-        }
-
-        return filename;
+    public FileMeta storeFile(byte[] content, String fileName, int subFileType) throws IOException, NoSuchAlgorithmException {
+        UUID md5 = HashHelper.getMd5Hash(content);
+        return fileMetaRepository.findByHash(md5)
+                .orElse(createFile(md5, content, fileName, subFileType));
     }
 
     @Override
@@ -62,7 +50,21 @@ public class FileStoreService implements IFileStoreService {
 
     @Override
     public Collection<FileMeta> getMetaFiles(int subtype) {
+        if (subtype == -1) {
+            return fileMetaRepository.findAll();
+        }
         return fileMetaRepository.findAllBySubType(subtype);
+    }
+
+    private FileMeta createFile(UUID md5, byte[] content, String fileName, int subFileType) throws IOException {
+        FileMeta fileMeta = FileMeta.builder()
+                .hash(md5)
+                .fileName(fileName)
+                .subType(subFileType)
+                .size(content.length)
+                .build();
+        systemProvider.storeFile(content, md5, fileName);
+        return fileMetaRepository.save(fileMeta);
     }
 
     private FileData getZipFiles(List<UUID> md5List) throws IOException {
