@@ -1,3 +1,17 @@
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE CACHE 1;
+
+CREATE TABLE base_time_entity
+(
+    id         bigserial NOT NULL,
+    created_at timestamp DEFAULT current_timestamp,
+    updated_at timestamp DEFAULT current_timestamp,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE roles
 (
     id        bigserial NOT NULL,
@@ -13,7 +27,8 @@ CREATE TABLE users
     first_name  varchar(255) NOT NULL,
     last_name   varchar(255) NOT NULL,
     "password"  varchar(255) NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    FOREIGN KEY (id) REFERENCES base_time_entity (id)
 );
 
 CREATE TABLE users_roles
@@ -22,14 +37,6 @@ CREATE TABLE users_roles
     role_id bigint NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (role_id) REFERENCES roles (id)
-);
-
-CREATE TABLE base_time_entity
-(
-    id         bigserial NOT NULL,
-    created_at timestamp DEFAULT current_timestamp,
-    updated_at timestamp DEFAULT current_timestamp,
-    PRIMARY KEY (id)
 );
 
 CREATE TABLE products
@@ -53,9 +60,8 @@ CREATE TABLE orders
 
 CREATE TABLE prices
 (
-    price  bigint NULL,
-    id     bigserial NOT NULL,
-    "cost" bigint NULL,
+    id   bigserial NOT NULL,
+    cost bigint NULL,
     CONSTRAINT prices_pkey PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES base_time_entity (id)
 );

@@ -15,7 +15,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class User  extends AbstractPersistable<Long> {
+public class UserEn extends BaseEn {
 
     @Column(name = "first_name", nullable = false)
     String firstName;
@@ -37,6 +37,6 @@ public class User  extends AbstractPersistable<Long> {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+    private Collection<RoleEn> roles;
 
 }

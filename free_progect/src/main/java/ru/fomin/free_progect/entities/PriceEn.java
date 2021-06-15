@@ -1,8 +1,6 @@
 package ru.fomin.free_progect.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -14,11 +12,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Price extends AbstractPersistable<Long> {
+public class PriceEn extends AbstractPersistable<Long> {
 
     Long cost;
 
     @OneToMany(mappedBy = "price")
-    List<ProductPrice> productPrice;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    List<ProductPriceEn> productPrice;
 
 }

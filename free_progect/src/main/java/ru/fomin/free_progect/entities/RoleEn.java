@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "roles")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role extends AbstractPersistable<Long> {
+public class RoleEn extends AbstractPersistable<Long> {
 
     @Column(name = "role_name")
     String roleName;

@@ -13,24 +13,24 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class OrderItem extends AbstractPersistable<Long> {
+public class OrderItemEn extends AbstractPersistable<Long> {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    Product product;
+    ProductEn product;
 
     @Column(name = "quantity")
     int quantity;
 
     @ManyToOne
     @JoinColumn(name = "price_id")
-    Price price;
+    PriceEn price;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    Order order;
+    OrderEn order;
 
-    public OrderItem(Product product) {
+    public OrderItemEn(ProductEn product) {
         this.product = product;
         quantity = 1;
         price = product.getProductPrice().getPrice();

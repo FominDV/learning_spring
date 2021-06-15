@@ -2,7 +2,6 @@ package ru.fomin.free_progect.entities;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -10,22 +9,20 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "products")
-@Data
-@NoArgsConstructor
+@Table(name = "base_time_entity")
+@Inheritance(strategy = InheritanceType.JOINED)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product extends BaseTimeEntity {
+@Data
+public abstract class BaseEn extends AbstractPersistable<Long> {
 
-    @Column(name = "title", nullable = false)
-    String title;
+    @Column(name = "created_at")
+    @CreationTimestamp
+    LocalDateTime createdAt;
 
-    @Column(name = "description")
-    String description;
-
-    @OneToOne(mappedBy = "product")
-    ProductPrice productPrice;
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    LocalDateTime updatedAt;
 
 }

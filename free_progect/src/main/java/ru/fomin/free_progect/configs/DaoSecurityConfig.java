@@ -8,13 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.fomin.free_progect.services.UserService;
+import ru.fomin.free_progect.services.impl.UserServiceImpl;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @RequiredArgsConstructor
 public class DaoSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserService userService;
+
+    private final UserServiceImpl userServiceImpl;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,7 +43,7 @@ public class DaoSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(userService);
+        authenticationProvider.setUserDetailsService(userServiceImpl);
         return authenticationProvider;
     }
 }

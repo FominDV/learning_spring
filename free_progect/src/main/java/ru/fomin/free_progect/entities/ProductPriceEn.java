@@ -6,21 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "products_prices")
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductPrice extends BaseTimeEntity {
+public class ProductPriceEn extends BaseEn {
 
     @OneToOne
     @JoinColumn(name = "product_id")
-    Product product;
+    ProductEn product;
 
     @ManyToOne
     @JoinColumn(name = "price_id")
-    Price price;
+    PriceEn price;
 
 }

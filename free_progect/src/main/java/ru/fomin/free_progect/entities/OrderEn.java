@@ -1,10 +1,7 @@
 package ru.fomin.free_progect.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,18 +11,20 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Order extends BaseTimeEntity {
+public class OrderEn extends BaseEn {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    User user;
+    UserEn user;
 
     @OneToMany(mappedBy = "order")
-    List<OrderItem> items;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    List<OrderItemEn> items;
 
     Long totalPrice;
 
-    public Order(User user, List<OrderItem> items) {
+    public OrderEn(UserEn user, List<OrderItemEn> items) {
         this.user = user;
         this.items = items;
     }

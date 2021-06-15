@@ -32,9 +32,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductPage getProductsByFilter(ProductFilter productFilter, int page) {
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<ProductEn> productEnPage = productRepository.findAllByPriceGreaterThanEqualAndPriceLessThanEqual(
-                pageable,
                 productFilter.getMinPriceLong(),
-                productFilter.getMaxPriceLong()
+                productFilter.getMaxPriceLong(),
+                pageable
         );
         return convertToProductPage(productEnPage);
     }
