@@ -4,6 +4,8 @@ import ru.fomin.free_progect.domains.OrderItem;
 
 public interface ProductPriceService {
 
-    OrderItem getOrderItem(Long productId);
+    OrderItem getOrderItemByProductId(Long productId);
+
+    OrderItem getOrderItemByProductPriceId(Long productPriceId);
 
 }

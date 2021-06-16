@@ -1,5 +1,7 @@
 package ru.fomin.free_progect.controllers;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,7 @@ import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/cart")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class CartController {
 
     @Resource
@@ -18,7 +21,6 @@ public class CartController {
 
     @GetMapping
     public String getCart(Model model) {
-
         return "cart";
     }
 
@@ -26,6 +28,18 @@ public class CartController {
     public String addProduct(@PathVariable(name = "id") Long productId, @ModelAttribute ProductFilter productFilter, @RequestParam Integer page) {
         cartService.addProduct(productId);
         return UrlMaker.getProductUrl(productFilter, page);
+    }
+
+    @GetMapping("increment/{id}")
+    public String incrementProduct(@PathVariable(name = "id") Long productId) {
+        cartService.addProduct(productId);
+        return "cart";
+    }
+
+    @GetMapping("decrement/{id}")
+    public String decrementProduct(@PathVariable(name = "id") Long orderItemId) {
+        cartService.removeProduct(orderItemId);
+        return "cart";
     }
 
 }

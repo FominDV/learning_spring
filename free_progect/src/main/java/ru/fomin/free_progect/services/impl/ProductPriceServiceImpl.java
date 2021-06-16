@@ -23,8 +23,15 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     OrderItemMapper orderItemMapper;
 
     @Override
-    public OrderItem getOrderItem(Long productId) {
+    public OrderItem getOrderItemByProductId(Long productId) {
         ProductPriceEn productPriceEn = productPriceRepository.findByProduct_Id(productId)
+                .orElseThrow(() -> new RuntimeException("product was not found"));
+        return orderItemMapper.convertToOrderItem(productPriceEn);
+    }
+
+    @Override
+    public OrderItem getOrderItemByProductPriceId(Long productPriceId) {
+        ProductPriceEn productPriceEn = productPriceRepository.findById(productPriceId)
                 .orElseThrow(() -> new RuntimeException("product was not found"));
         return orderItemMapper.convertToOrderItem(productPriceEn);
     }

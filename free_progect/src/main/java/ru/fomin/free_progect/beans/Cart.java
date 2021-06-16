@@ -38,7 +38,17 @@ public class Cart {
     public void addProduct(OrderItem addingOrderItem) {
         getOrderItem(addingOrderItem)
                 .ifPresentOrElse(incrementProductConsumer, getAddableNewProduct(addingOrderItem));
-        refreshPriceAndQuantity(addingOrderItem.getProduct());
+        refreshPriceAndQuantityAfterAdding(addingOrderItem.getProduct());
+    }
+
+    public void removeProduct(OrderItem removingOrderItem) {
+        OrderItem currentOrderItem = getOrderItem(removingOrderItem)
+                .orElseThrow(() -> new RuntimeException("order item was not found into the cart"));
+        currentOrderItem.decrementQuantity();
+        if (currentOrderItem.getQuantity() < 1) {
+            orderItemList.remove(currentOrderItem);
+        }
+        refreshPriceAndQuantityAfterRemoving(removingOrderItem.getProduct());
     }
 
     private Optional<OrderItem> getOrderItem(OrderItem orderItem) {
@@ -58,11 +68,21 @@ public class Cart {
         };
     }
 
-    private void refreshPriceAndQuantity(Product newProduct) {
+    private void refreshPriceAndQuantityAfterAdding(Product newProduct) {
         totalQuantity++;
         totalPricePenny += newProduct.getPricePenny();
         totalPriceRub += newProduct.getPriceRub() + totalPricePenny / 100;
         totalPricePenny %= 100;
+    }
+
+    private void refreshPriceAndQuantityAfterRemoving(Product removingProduct) {
+        totalQuantity--;
+        totalPriceRub -= removingProduct.getPriceRub();
+        totalPricePenny -= removingProduct.getPricePenny();
+        if (totalPricePenny < 0) {
+            totalPricePenny += 100;
+            totalPriceRub--;
+        }
     }
 
 }

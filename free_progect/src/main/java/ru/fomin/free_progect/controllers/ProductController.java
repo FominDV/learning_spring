@@ -1,5 +1,7 @@
 package ru.fomin.free_progect.controllers;
 
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/product")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductController {
 
     ProductService productService;

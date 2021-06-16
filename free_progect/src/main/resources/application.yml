@@ -4,14 +4,14 @@ server:
     context-path: /free
 spring:
   datasource:
-#    username: nya
-#    password: nya777
-#    driver-class-name: org.postgresql.Driver
-#    url: jdbc:postgresql://localhost:5436/nya_db
-    username: postgres
-    password: Pfrjcvjltcfyn1992
+    username: nya
+    password: nya777
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/nya_base14
+    url: jdbc:postgresql://localhost:5434/nya_db
+#    username: postgres
+#    password: Pfrjcvjltcfyn1992
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/nya_base14
   jpa:
     show-sql: false
     hibernate:

@@ -5,7 +5,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.fomin.free_progect.beans.Cart;
-import ru.fomin.free_progect.domains.OrderItem;
 import ru.fomin.free_progect.services.CartService;
 import ru.fomin.free_progect.services.ProductPriceService;
 
@@ -27,8 +26,12 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addProduct(Long productId) {
-        OrderItem addingOrderItem = productPriceService.getOrderItem(productId);
-        cart.addProduct(addingOrderItem);
+        cart.addProduct(productPriceService.getOrderItemByProductId(productId));
+    }
+
+    @Override
+    public void removeProduct(Long orderItemId) {
+        cart.removeProduct(productPriceService.getOrderItemByProductPriceId(orderItemId));
     }
 
 }

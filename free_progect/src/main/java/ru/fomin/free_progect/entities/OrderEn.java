@@ -17,7 +17,7 @@ public class OrderEn extends BaseEn {
     @JoinColumn(name = "user_id")
     UserEn user;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     List<OrderItemEn> items;
