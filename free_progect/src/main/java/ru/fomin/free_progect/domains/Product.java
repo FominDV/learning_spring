@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 public class Product {
     Long id;
     String title;
+    String description;
     int priceRub;
     int pricePenny;
 }

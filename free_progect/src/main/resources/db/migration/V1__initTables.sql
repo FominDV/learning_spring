@@ -79,14 +79,11 @@ CREATE TABLE products_prices
 
 CREATE TABLE order_items
 (
-    id         bigserial NOT NULL,
-    quantity   int NULL,
-    order_id   bigint NULL,
-    price_id   bigint NULL,
-    product_id bigint NULL,
+    id               bigserial NOT NULL,
+    quantity         int NULL,
+    order_id         bigint NULL,
+    product_price_id bigint    NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (order_id) REFERENCES orders (id),
-    FOREIGN KEY (price_id) REFERENCES prices (id),
-    FOREIGN KEY (product_id) REFERENCES products (id)
+    FOREIGN KEY (product_price_id) REFERENCES products_prices (id)
 );
-

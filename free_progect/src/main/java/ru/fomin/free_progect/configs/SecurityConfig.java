@@ -13,7 +13,7 @@ import ru.fomin.free_progect.services.impl.UserServiceImpl;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @RequiredArgsConstructor
-public class DaoSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserServiceImpl userServiceImpl;
 
@@ -22,16 +22,20 @@ public class DaoSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/cart/**").authenticated()
                 .antMatchers("/moderator/**").hasRole("MODERATOR")
-                .anyRequest().permitAll()
+                .anyRequest()
+                .permitAll()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/product", true)
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
                 .usernameParameter("email")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutSuccessUrl("/product");
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .permitAll();
     }
 
     @Bean

@@ -16,24 +16,20 @@ import javax.persistence.*;
 public class OrderItemEn extends AbstractPersistable<Long> {
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
-    ProductEn product;
+    @JoinColumn(name = "product_price_id", nullable = false)
+    ProductPriceEn productPrice;
 
     @Column(name = "quantity")
     int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "price_id")
-    PriceEn price;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
     OrderEn order;
 
     public OrderItemEn(ProductEn product) {
-        this.product = product;
         quantity = 1;
-        price = product.getProductPrice().getPrice();
+        productPrice = product.getProductPrice();
     }
 
     public void incrementQuantity() {

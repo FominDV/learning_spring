@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductFilter {
 
-    final Double maximumPriceLimit = 9999.99;
+    final Double maximumPriceLimit = 99999.99;
 
     Double minPrice = 0.0;
     Double maxPrice = maximumPriceLimit;

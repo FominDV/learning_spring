@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
 <div>
     <div id="loginbox" style="margin-top: 50px;" class="mainbox col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
         <div class="panel panel-info">
@@ -44,8 +45,13 @@
                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                         <input type="password" name="password" placeholder="password" class="form-control">
                     </div>
-                    <div style="margin-top: 10px" class="input-group">
-                        <button  type="submit" class="btn-success form-control">Login</button>
+                    <div style="margin: 10px" class="row">
+                        <div class="col">
+                            <button  type="submit" class="btn-success form-control">Login</button>
+                        </div>
+                        <div class="col" style="margin-top: 15px">
+                            <a class="form-control btn-danger" th:align="center" th:href="@{/}">To Main Page</a>
+                        </div>
                     </div>
 
 
