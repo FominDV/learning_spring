@@ -1,7 +1,7 @@
 server:
   port: 8189
   servlet:
-    context-path: /free
+    context-path: /nya
 spring:
   datasource:
     username: nya

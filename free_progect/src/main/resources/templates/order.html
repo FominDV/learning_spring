@@ -14,7 +14,7 @@
     <h1 class="font-weight-bold text-light bg-dark" align="center">ORDER</h1>
     <div align="center" th:if="${orders.isEmpty()}">
         <h2 style="color: blue" >no orders have been created yet</h2>
-        <img th:src="@{/no_products.ico}">
+        <img th:src="@{/no_orders.ico}">
     </div>
 
     <div class="container" th:if="${order != null}">
