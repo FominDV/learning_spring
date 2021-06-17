@@ -3,6 +3,7 @@ package ru.fomin.free_progect.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,10 +29,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public UserEn findCurrentUser() throws UsernameNotFoundException{
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getUserEnByEmail(email);
+    }
+
+    @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEn user = findByUsername(email).orElseThrow(() -> new UsernameNotFoundException(String.format("User with email '%s' was not found", email)));
+        UserEn user = getUserEnByEmail(email);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+    }
+
+    private UserEn getUserEnByEmail(String email) throws UsernameNotFoundException{
+        return findByUsername(email).orElseThrow(() -> new UsernameNotFoundException(String.format("User with email '%s' was not found", email)));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<RoleEn> roles) {

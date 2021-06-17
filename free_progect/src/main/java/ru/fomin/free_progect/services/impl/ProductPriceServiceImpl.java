@@ -3,8 +3,7 @@ package ru.fomin.free_progect.services.impl;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import ru.fomin.free_progect.domains.OrderItem;
+import ru.fomin.free_progect.models.OrderItem;
 import ru.fomin.free_progect.entities.ProductPriceEn;
 import ru.fomin.free_progect.mappers.OrderItemMapper;
 import ru.fomin.free_progect.repositories.ProductPriceRepository;
@@ -32,8 +31,14 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @Override
     public OrderItem getOrderItemByProductPriceId(Long productPriceId) {
         ProductPriceEn productPriceEn = productPriceRepository.findById(productPriceId)
-                .orElseThrow(() -> new RuntimeException("product was not found"));
+                .orElseThrow(() -> new RuntimeException("product price was not found"));
         return orderItemMapper.convertToOrderItem(productPriceEn);
+    }
+
+    @Override
+    public ProductPriceEn getOrderItemEn(Long productPriceId) {
+        return productPriceRepository.findById(productPriceId)
+                .orElseThrow(() -> new RuntimeException("product price was not found"));
     }
 
 

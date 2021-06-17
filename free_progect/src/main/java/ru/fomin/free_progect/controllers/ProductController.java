@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.fomin.free_progect.domains.ProductFilter;
-import ru.fomin.free_progect.domains.Product;
-import ru.fomin.free_progect.domains.ProductPage;
+import ru.fomin.free_progect.models.ProductFilter;
+import ru.fomin.free_progect.models.Product;
+import ru.fomin.free_progect.models.ProductPage;
 import ru.fomin.free_progect.services.ProductService;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-import ru.fomin.free_progect.domains.ProductPage;
+import ru.fomin.free_progect.models.ProductPage;
 import ru.fomin.free_progect.entities.ProductEn;
 
 import javax.annotation.Resource;

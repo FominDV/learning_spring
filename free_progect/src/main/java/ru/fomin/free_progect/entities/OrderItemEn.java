@@ -1,8 +1,6 @@
 package ru.fomin.free_progect.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -11,6 +9,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
 @Table(name = "order_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderItemEn extends AbstractPersistable<Long> {
@@ -28,8 +28,13 @@ public class OrderItemEn extends AbstractPersistable<Long> {
     OrderEn order;
 
     public OrderItemEn(ProductEn product) {
-        quantity = 1;
         productPrice = product.getProductPrice();
+        quantity = 1;
+    }
+
+    public OrderItemEn(ProductEn product, int quantity) {
+        productPrice = product.getProductPrice();
+        this.quantity = quantity;
     }
 
     public void incrementQuantity() {

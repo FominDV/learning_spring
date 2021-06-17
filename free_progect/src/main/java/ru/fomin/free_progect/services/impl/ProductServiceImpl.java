@@ -7,11 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.fomin.free_progect.domains.ProductFilter;
-import ru.fomin.free_progect.domains.ProductPage;
+import ru.fomin.free_progect.models.ProductFilter;
+import ru.fomin.free_progect.models.ProductPage;
 import ru.fomin.free_progect.entities.ProductEn;
 import ru.fomin.free_progect.mappers.PageMapper;
-import ru.fomin.free_progect.mappers.ProductMapper;
 import ru.fomin.free_progect.repositories.ProductRepository;
 import ru.fomin.free_progect.services.ProductService;
 

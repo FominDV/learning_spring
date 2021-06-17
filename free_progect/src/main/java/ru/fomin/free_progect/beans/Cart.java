@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
-import ru.fomin.free_progect.domains.OrderItem;
-import ru.fomin.free_progect.domains.Product;
+import ru.fomin.free_progect.models.OrderItem;
+import ru.fomin.free_progect.models.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -49,6 +49,17 @@ public class Cart {
             orderItemList.remove(currentOrderItem);
         }
         refreshPriceAndQuantityAfterRemoving(removingOrderItem.getProduct());
+    }
+
+    public void clearCart() {
+        orderItemList.clear();
+        totalPriceRub = 0;
+        totalPricePenny = 0;
+        totalQuantity = 0;
+    }
+
+    public boolean isEmpty(){
+        return orderItemList.isEmpty();
     }
 
     private Optional<OrderItem> getOrderItem(OrderItem orderItem) {

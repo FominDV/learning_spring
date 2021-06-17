@@ -1,4 +1,4 @@
-package ru.fomin.free_progect.domains;
+package ru.fomin.free_progect.models;
 
 import lombok.Builder;
 import lombok.Data;

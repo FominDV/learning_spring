@@ -17,15 +17,22 @@ public class OrderEn extends BaseEn {
     @JoinColumn(name = "user_id")
     UserEn user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     List<OrderItemEn> items;
 
     Long totalPrice;
 
-    public OrderEn(UserEn user, List<OrderItemEn> items) {
+    public OrderEn(UserEn user, List<OrderItemEn> items, Long totalPrice) {
         this.user = user;
         this.items = items;
+        this.totalPrice = totalPrice;
     }
+
+    public OrderEn(UserEn user, Long totalPrice) {
+        this.user = user;
+        this.totalPrice = totalPrice;
+    }
+
 }

@@ -8,4 +8,6 @@ public interface UserService {
 
     Optional<UserEn> findByUsername(String email);
 
+    UserEn findCurrentUser();
+
 }

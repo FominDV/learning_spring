@@ -1,7 +1,15 @@
 package ru.fomin.free_progect.services;
 
+import ru.fomin.free_progect.models.Order;
+
+import java.util.List;
+
 public interface OrderService {
 
-    void createOrder();
+    Long createOrder();
+
+    List<Order> getOrderList();
+
+    Order getOrder(Long orderId);
 
 }

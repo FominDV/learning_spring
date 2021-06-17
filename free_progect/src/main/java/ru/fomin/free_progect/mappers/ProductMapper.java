@@ -1,7 +1,7 @@
 package ru.fomin.free_progect.mappers;
 
 import org.springframework.stereotype.Component;
-import ru.fomin.free_progect.domains.Product;
+import ru.fomin.free_progect.models.Product;
 import ru.fomin.free_progect.entities.ProductEn;
 
 import java.util.List;
