@@ -5,7 +5,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.fomin.free_progect.models.ProductFilter;
+import ru.fomin.free_progect.domains.ProductFilter;
 import ru.fomin.free_progect.services.CartService;
 import ru.fomin.free_progect.util.UrlMaker;
 

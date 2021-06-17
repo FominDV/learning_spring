@@ -1,6 +1,6 @@
 package ru.fomin.free_progect.services;
 
-import ru.fomin.free_progect.models.OrderItem;
+import ru.fomin.free_progect.domains.OrderItem;
 import ru.fomin.free_progect.entities.OrderEn;
 import ru.fomin.free_progect.entities.OrderItemEn;
 

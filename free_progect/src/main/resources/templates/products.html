@@ -43,6 +43,7 @@
                 <td>description</td>
                 <td>price</td>
                 <td sec:authorize="hasRole('USER')">wanted</td>
+                <td sec:authorize="hasRole('MODERATOR')">moderate</td>
             </tr>
             </thead>
             <tbody>
@@ -54,6 +55,12 @@
                     <a class="btn btn-success"
                        th:href="@{'/cart/' + ${product.id +'?minPrice=' + filter.minPrice + '&maxPrice=' + filter.maxPrice + '&page=' + page}}">
                         add to cart
+                    </a>
+                </td>
+                <td sec:authorize="hasRole('MODERATOR')">
+                    <a class="btn btn-success"
+                       th:href="@{'/moderator?id=' + ${product.id}}">
+                        change
                     </a>
                 </td>
             </tr>

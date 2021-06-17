@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductEn extends BaseEn {

@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.fomin.free_progect.beans.Cart;
-import ru.fomin.free_progect.models.Order;
+import ru.fomin.free_progect.domains.Order;
 import ru.fomin.free_progect.entities.OrderEn;
 import ru.fomin.free_progect.entities.OrderItemEn;
 import ru.fomin.free_progect.mappers.OrderMapper;

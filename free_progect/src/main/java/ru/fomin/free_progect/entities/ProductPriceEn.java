@@ -1,8 +1,6 @@
 package ru.fomin.free_progect.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
@@ -11,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "products_prices")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductPriceEn extends BaseEn {
 

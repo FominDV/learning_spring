@@ -1,6 +1,6 @@
 package ru.fomin.free_progect.services;
 
-import ru.fomin.free_progect.models.Order;
+import ru.fomin.free_progect.domains.Order;
 
 import java.util.List;
 

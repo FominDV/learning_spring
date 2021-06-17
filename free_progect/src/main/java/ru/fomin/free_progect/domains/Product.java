@@ -1,12 +1,12 @@
-package ru.fomin.free_progect.models;
+package ru.fomin.free_progect.domains;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Product {
     Long id;

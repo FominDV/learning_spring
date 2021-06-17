@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
-import ru.fomin.free_progect.models.OrderItem;
-import ru.fomin.free_progect.models.Product;
+import ru.fomin.free_progect.domains.OrderItem;
+import ru.fomin.free_progect.domains.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;

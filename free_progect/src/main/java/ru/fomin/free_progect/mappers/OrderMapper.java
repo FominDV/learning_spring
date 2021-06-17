@@ -3,8 +3,8 @@ package ru.fomin.free_progect.mappers;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
-import ru.fomin.free_progect.models.Order;
-import ru.fomin.free_progect.models.OrderItem;
+import ru.fomin.free_progect.domains.Order;
+import ru.fomin.free_progect.domains.OrderItem;
 import ru.fomin.free_progect.entities.OrderEn;
 
 import javax.annotation.Resource;

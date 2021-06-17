@@ -1,6 +1,6 @@
 package ru.fomin.free_progect.util;
 
-import ru.fomin.free_progect.models.ProductFilter;
+import ru.fomin.free_progect.domains.ProductFilter;
 
 public class UrlMaker {
 
