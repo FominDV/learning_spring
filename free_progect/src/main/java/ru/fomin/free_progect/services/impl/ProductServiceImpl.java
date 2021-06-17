@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.fomin.free_progect.entities.ProductPriceEn;
 import ru.fomin.free_progect.mappers.ProductMapper;
 import ru.fomin.free_progect.domains.Product;
@@ -59,15 +60,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Product product) {
-//        ProductPriceEn productPriceEn = productPriceService.findByProductAndPrice(product.getId(), getPriceOnlyPenny(product));
-//        ProductEn productEn = productPriceEn.getProduct();
-//        Long newPrice = getPriceOnlyPenny(product);
-//        if (!newPrice.equals(productPriceEn.getPrice().getCost())) {
-//            productEn.setProductPrice( productPriceService.create(newPrice, productEn));
-//        }
-//        productEn.setTitle(product.getTitle());
-//        productEn.setDescription(product.getDescription());
-//        productRepository.save(productEn);
+        ProductEn productEn = productRepository.getById(product.getId());
+        Long newPrice = getPriceOnlyPenny(product);
+        if (!newPrice.equals(productEn.getProductPrice().getPrice().getCost())) {
+            productEn.setProductPrice( productPriceService.create(newPrice, productEn));
+        }
+        productEn.setTitle(product.getTitle());
+        productEn.setDescription(product.getDescription());
+        productRepository.save(productEn);
     }
 
     private Long getPriceOnlyPenny(Product product) {

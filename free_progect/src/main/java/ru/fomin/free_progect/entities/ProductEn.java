@@ -20,7 +20,8 @@ public class ProductEn extends BaseEn {
     @Column(name = "description")
     String description;
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne
+    @JoinColumn(name = "product_price_id")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     ProductPriceEn productPrice;

@@ -9,10 +9,12 @@ import ru.fomin.free_progect.entities.ProductEn;
 import ru.fomin.free_progect.entities.ProductPriceEn;
 import ru.fomin.free_progect.mappers.OrderItemMapper;
 import ru.fomin.free_progect.repositories.ProductPriceRepository;
+import ru.fomin.free_progect.services.PriceService;
 import ru.fomin.free_progect.services.ProductPriceService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -24,10 +26,12 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     @Resource
     OrderItemMapper orderItemMapper;
 
+    @Resource
+    PriceService priceService;
+
     @Override
     public OrderItem getOrderItemByProductId(Long productId) {
-        ProductPriceEn productPriceEn = productPriceRepository.findByProduct_Id(productId)
-                .orElseThrow(() -> new RuntimeException("product was not found"));
+        ProductPriceEn productPriceEn = findByProductId(productId);
         return orderItemMapper.convertToOrderItem(productPriceEn);
     }
 
@@ -45,18 +49,23 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     }
 
     @Override
-    public ProductPriceEn findByProductAndPrice(Long productId, Long cost) {
-        return productPriceRepository.findByProduct_IdAndPrice_Cost(productId, cost)
+    public ProductPriceEn findByProductId(Long productId) {
+        return productPriceRepository.findByProduct_Id(productId)
                 .orElseThrow(() -> new RuntimeException("product price was not found"));
     }
 
     @Override
+    public Optional<ProductPriceEn> findByProductAndPrice(Long productId, Long cost) {
+        return productPriceRepository.findByProduct_IdAndPrice_Cost(productId, cost);
+    }
+
+    @Override
     public ProductPriceEn create(Long cost, ProductEn productEn) {
-        PriceEn priceEn = PriceEn.builder()
-                .cost(cost)
+        ProductPriceEn productPriceEn = ProductPriceEn.builder()
+                .product(productEn)
+                .price(priceService.create(cost))
                 .build();
-        //TODO
-        return null;
+        return productPriceRepository.save(productPriceEn);
     }
 
 

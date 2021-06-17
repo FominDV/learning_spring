@@ -62,27 +62,27 @@ VALUES (5),
        (64);
 
 INSERT INTO products
-    (id, title)
-VALUES (5, 'sour cream'),
-       (6, 'onion'),
-       (7, 'tomato'),
-       (8, 'potato'),
-       (9, 'oil'),
-       (10, 'pasta'),
-       (11, 'banana'),
-       (12, 'orange'),
-       (13, 'chicken'),
-       (14, 'milk'),
-       (15, 'pork meat'),
-       (16, 'tea'),
-       (17, 'water'),
-       (18, 'energy drink'),
-       (19, 'salt'),
-       (20, 'bread'),
-       (21, 'sunflower oil'),
-       (22, 'croissants'),
-       (23, 'curd'),
-       (24, 'cheese');
+    (id, title, product_price_id)
+VALUES (5, 'sour cream', 45),
+       (6, 'onion', 46),
+       (7, 'tomato', 47),
+       (8, 'potato', 48),
+       (9, 'oil', 49),
+       (10, 'pasta', 50),
+       (11, 'banana', 51),
+       (12, 'orange', 52),
+       (13, 'chicken', 53),
+       (14, 'milk', 54),
+       (15, 'pork meat', 55),
+       (16, 'tea', 56),
+       (17, 'water', 57),
+       (18, 'energy drink', 58),
+       (19, 'salt', 59),
+       (20, 'bread', 60),
+       (21, 'sunflower oil', 61),
+       (22, 'croissants', 62),
+       (23, 'curd', 63),
+       (24, 'cheese', 64);
 
 INSERT INTO prices
     (id, cost)

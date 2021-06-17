@@ -44,6 +44,7 @@ CREATE TABLE products
     description varchar(255) NULL,
     title       varchar(255) NOT NULL,
     id          bigserial    NOT NULL,
+    product_price_id bigint NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES base_time_entity (id)
 );
@@ -62,8 +63,7 @@ CREATE TABLE prices
 (
     id   bigserial NOT NULL,
     cost bigint NULL,
-    CONSTRAINT prices_pkey PRIMARY KEY (id),
-    FOREIGN KEY (id) REFERENCES base_time_entity (id)
+    CONSTRAINT prices_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE products_prices

@@ -11,8 +11,6 @@ import java.util.List;
 @Table(name = "prices")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PriceEn extends AbstractPersistable<Long> {
 
@@ -23,4 +21,7 @@ public class PriceEn extends AbstractPersistable<Long> {
     @EqualsAndHashCode.Exclude
     List<ProductPriceEn> productPrice;
 
+    public PriceEn(Long cost) {
+        this.cost = cost;
+    }
 }
