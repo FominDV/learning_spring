@@ -3,6 +3,7 @@ package ru.fomin.free_progect.entities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import java.util.List;
