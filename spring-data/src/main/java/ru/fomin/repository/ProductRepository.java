@@ -9,6 +9,6 @@ import ru.fomin.entity.ProductEn;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEn, Long> {
 
-    Page<ProductEn> findAllByPriceGreaterThanEqualAndPriceLessThanEqual(Pageable pageable, Long min, Long max);
+    Page<ProductEn> findAllByPriceGreaterThanEqualAndPriceLessThanEqual(Long min, Long max, Pageable pageable);
 
 }
