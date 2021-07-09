@@ -26,7 +26,7 @@ CREATE TABLE users
     father_name varchar(255) NULL,
     first_name  varchar(255) NOT NULL,
     last_name   varchar(255) NOT NULL,
-    "password"  varchar(255) NULL,
+    password  varchar(255) NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES base_time_entity (id)
 );
