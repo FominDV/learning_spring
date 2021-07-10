@@ -8,7 +8,5 @@ RUN mvn -f /home/app/pom.xml clean test package
 # Package stage
 FROM openjdk:11.0.7-jdk-slim
 COPY --from=build /home/app/target/*.jar app.jar
-COPY --from=build /home/app/wait-for-it.sh .
-COPY docker/wait-for-it.sh .
 EXPOSE 8189
 ENTRYPOINT ["java","-Dspring.profiles.active=dev","-jar","app.jar"]

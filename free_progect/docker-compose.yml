@@ -1,7 +1,8 @@
 version: '3.1'
 
 volumes:
-  cloud-postgres_nya: {}
+  db_nya:
+    driver: local
 
 services:
   app:
@@ -20,17 +21,18 @@ services:
     image: postgres
     container_name: db
     restart: always
+    user: root
     volumes:
-      - cloud-postgres_nya:/var/lib/postgresql
+      - db_nya:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: nya_db
       POSTGRES_USER: nya
       POSTGRES_PASSWORD: nya777
       TZ: Europe/Moscow
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready -U nya -d nya_db"]
       interval: 5s
       timeout: 2s
       retries: 2
     ports:
-      - 5432:5432
+      - 5423:5432
