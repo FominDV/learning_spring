@@ -1,7 +1,7 @@
 version: '3.1'
-#
-#volumes:
-#  cloud-postgres_nya: {}
+
+volumes:
+  cloud-postgres_nya: {}
 
 services:
   app:
@@ -10,26 +10,27 @@ services:
     build: ./
     ports:
       - 8189:8189
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/nya_db
+      - TZ=Europe/Moscow
     depends_on:
-      - db
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
-#      - SPRING_DATASOURCE_USERNAME=nya
-#      - SPRING_DATASOURCE_PASSWORD=nya777
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      db:
+        condition: service_healthy
   db:
-#    image: library/postgres:latest
     image: postgres
     container_name: db
     restart: always
-#    volumes:
-#      - type: volume
-#        target: /var/lib/postgresql
+    volumes:
+      - cloud-postgres_nya:/var/lib/postgresql
     environment:
       POSTGRES_DB: nya_db
       POSTGRES_USER: nya
       POSTGRES_PASSWORD: nya777
+      TZ: Europe/Moscow
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 2s
+      retries: 2
     ports:
       - 5432:5432
-
-

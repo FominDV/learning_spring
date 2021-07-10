@@ -2,34 +2,3 @@ server:
   port: 8189
   servlet:
     context-path: /nya
-#spring:
-##  datasource:
-##    username: nya
-##    password: nya777
-##    driver-class-name: org.postgresql.Driver
-##    url: jdbc:postgresql://db:5432/nya_db
-##  jpa:
-##    show-sql: false
-##    hibernate:
-##      ddl-auto: none
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
-#    username: sa
-#    password:
-#    jpa:
-#      show-sql: false
-#      properties:
-#        hibernate:
-#          dialect: org.hibernate.dialect.H2Dialect
-#    h2:
-#      console:
-#        enabled: true
-#        settings:
-#          web-allow-others: false
-#  flyway:
-#    enabled: true
-#
-#pageSize: 5
-#formatter:
-#  dateTime: 'dd.MM.yyyy HH:mm'
