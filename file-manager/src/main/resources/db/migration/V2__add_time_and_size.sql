@@ -1,3 +1,0 @@
-ALTER TABLE file_meta
-    ADD COLUMN time_creation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    ADD  COLUMN file_size bigint NOT NULL;
