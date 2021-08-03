@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+import java.net.HttpCookie;
+import java.net.http.HttpRequest;
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api")
 public class TestController {
@@ -19,6 +24,7 @@ public class TestController {
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public String getUserInfo() {
+
         return "user info";
     }
 
