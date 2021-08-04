@@ -1,4 +1,4 @@
-package ru.fomin.keycloak.controllers;
+package ru.fomin.rest_keycloak.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -6,23 +6,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.fomin.keycloak.annotations.MyAnnotation;
-import ru.fomin.keycloak.annotations.ThreadLocalService;
-
-import javax.servlet.http.HttpSession;
-import java.net.HttpCookie;
-import java.net.http.HttpRequest;
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api")
-@MyAnnotation(value = "HELLO!!!!")
 public class TestController {
-
 
     @GetMapping("/anonymous")
     public String getAnonymousInfo() {
-        return ThreadLocalService.threadLocal.get();
+        return "Anonymous";
     }
 
     @GetMapping("/user")
