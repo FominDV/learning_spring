@@ -9,7 +9,7 @@ angular.module('app').controller('ordersController', function ($scope, $http, $l
             $scope.orders = response.data;
             $scope.getOrderDetails(response.data[0])
         });
-    };
+    }
 
     $scope.getOrderDetails = function (order) {
         $http({
@@ -22,7 +22,7 @@ angular.module('app').controller('ordersController', function ($scope, $http, $l
             $scope.order = order;
             $scope.items = response.data;
         });
-    };
+    }
 
     $scope.hasOrder = function () {
         if ($scope.order) {
@@ -30,7 +30,7 @@ angular.module('app').controller('ordersController', function ($scope, $http, $l
         } else {
             return false;
         }
-    };
+    }
 
     $scope.loadOrders();
 });
