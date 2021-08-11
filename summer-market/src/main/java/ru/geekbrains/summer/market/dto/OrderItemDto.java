@@ -2,6 +2,7 @@ package ru.geekbrains.summer.market.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.geekbrains.summer.market.model.OrderItem;
 import ru.geekbrains.summer.market.model.Product;
 
 import java.math.BigDecimal;
@@ -21,6 +22,12 @@ public class OrderItemDto {
         this.pricePerProduct = product.getPrice();
         this.price = product.getPrice();
         this.productTitle = product.getTitle();
+    }
+
+    public static OrderItemDto of(OrderItem orderItem) {
+        OrderItemDto orderItemDto = new OrderItemDto(orderItem.getProduct());
+        orderItemDto.changeQuantity(orderItem.getQuantity() - 1);
+        return orderItemDto;
     }
 
     public void changeQuantity(int amount) {
