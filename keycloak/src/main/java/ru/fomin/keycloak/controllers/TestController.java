@@ -16,7 +16,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping("/api")
-@MyAnnotation(value = "HELLO!!!!")
+@MyAnnotation(ThreadLocalService.d)
 public class TestController {
 
 
