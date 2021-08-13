@@ -6,10 +6,10 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.summer.market.dto.ProductDto;
-import ru.geekbrains.summer.market.model.Product;
-import ru.geekbrains.summer.market.utils.specifications.ProductSpecificationBuilder;
-import ru.geekbrains.summer.market.services.ProductService;
 import ru.geekbrains.summer.market.exceptions.ResourceNotFoundException;
+import ru.geekbrains.summer.market.model.Product;
+import ru.geekbrains.summer.market.services.ProductService;
+import ru.geekbrains.summer.market.utils.specifications.ProductSpecificationBuilder;
 
 import java.math.BigDecimal;
 
