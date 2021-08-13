@@ -16,12 +16,11 @@ import ru.geekbrains.summer.market.utils.Cart;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class OrderService implements OrderServiceToSrv,OrderServiceToController{
+public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductService productService;
     private final Cart cart;
@@ -48,14 +47,8 @@ public class OrderService implements OrderServiceToSrv,OrderServiceToController{
         cart.clear();
     }
 
-    @Override
-    public List<OrderDto> findAllOrderDto() {
-        return findAll().stream().map(OrderDto::new).collect(Collectors.toList());
+    @Transactional
+    public List<OrderDto> findAllDtosByUsername(String username) {
+        return orderRepository.findAllByUsername(username).stream().map(OrderDto::new).collect(Collectors.toList());
     }
-
-    public List<Order> findAll() {
-        return orderRepository.findAll();
-    }
-
-
 }

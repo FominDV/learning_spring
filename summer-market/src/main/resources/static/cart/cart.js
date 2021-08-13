@@ -67,8 +67,7 @@ angular.module('app').controller('cartController', function ($scope, $http, $loc
             alert('Заказ создан');
             $scope.loadCart();
         }, function errorCallback(response) {
-            alert('Поля "Адрес" и "Телефон" должны быть заполнены');
-            $scope.order_info = null;
+            alert(response.data.messages);
         });
     }
 

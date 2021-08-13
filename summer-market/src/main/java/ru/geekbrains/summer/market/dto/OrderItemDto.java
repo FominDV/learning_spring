@@ -24,10 +24,12 @@ public class OrderItemDto {
         this.productTitle = product.getTitle();
     }
 
-    public static OrderItemDto of(OrderItem orderItem) {
-        OrderItemDto orderItemDto = new OrderItemDto(orderItem.getProduct());
-        orderItemDto.changeQuantity(orderItem.getQuantity() - 1);
-        return orderItemDto;
+    public OrderItemDto(OrderItem orderItem) {
+        this.productId = orderItem.getId();
+        this.quantity = orderItem.getQuantity();
+        this.pricePerProduct = orderItem.getPricePerProduct();
+        this.price = orderItem.getPrice();
+        this.productTitle = orderItem.getProduct().getTitle();
     }
 
     public void changeQuantity(int amount) {

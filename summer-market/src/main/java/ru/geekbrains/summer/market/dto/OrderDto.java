@@ -16,18 +16,13 @@ public class OrderDto {
     private String address;
     private String phone;
     private BigDecimal price;
-    List<OrderItemDto> orderItems;
+    private List<OrderItemDto> items;
 
     public OrderDto(Order order) {
         this.id = order.getId();
         this.address = order.getAddress();
         this.phone = order.getPhone();
         this.price = order.getPrice();
-    }
-
-    public static OrderDto toOrderDto(Order order){
-        OrderDto orderDto = new OrderDto(order);
-        orderDto.setOrderItems(order.getItems().stream().map(OrderItemDto::of).collect(Collectors.toList()));
-        return orderDto;
+        this.items = order.getItems().stream().map(OrderItemDto::new).collect(Collectors.toList());
     }
 }
