@@ -26,7 +26,7 @@ public class ProductSpecificationBuilderImpl implements ProductSpecificationBuil
     }
 
     private Specification<Product> priceLessOrEqualsThan(BigDecimal maxPrice) {
-        return ((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Product_.price), maxPrice));
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Product_.price), maxPrice);
     }
 
     private Specification<Product> titleLike(String title) {
