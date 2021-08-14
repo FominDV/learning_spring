@@ -10,6 +10,10 @@ angular.module('app').controller('productsController', function ($scope, $http, 
         });
     }
 
+    $scope.clearFilter = function () {
+        $scope.product_filter = null;
+    }
+
     $scope.loadPage = function (pageIndex = 1) {
         $http({
             url: contextPath + '/api/v1/products',
