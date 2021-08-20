@@ -19,14 +19,11 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ServiceProfilingAspect {
 
-    StopWatch stopWatch;
-
     @Getter
     Map<String, StopWatch> serviceProfilingMap;
 
     @PostConstruct
     private void init() {
-        stopWatch = new StopWatch();
         serviceProfilingMap = new HashMap<>();
     }
 
