@@ -30,3 +30,4 @@ jwt:
 
 statistic:
   timeUnit: ms
+  divisor: 1_000_000

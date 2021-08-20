@@ -1,6 +1,5 @@
 package ru.geekbrains.summer.market.aspects;
 
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
@@ -23,7 +22,7 @@ public class ServiceProfilingAspect {
     StopWatch stopWatch;
 
     @Getter
-    Map<String, Long> serviceProfilingMap;
+    Map<String, StopWatch> serviceProfilingMap;
 
     @PostConstruct
     private void init() {
@@ -33,24 +32,25 @@ public class ServiceProfilingAspect {
 
     @Around("execution(public * ru.geekbrains.summer.market.services.*.*(..))")
     public Object serviceProfiling(ProceedingJoinPoint joinPoint) throws Throwable {
+        StopWatch stopWatch = getCurrentStopWatch(joinPoint);
         Object returnedValue;
         try {
-            if (!stopWatch.isRunning()) {
-                stopWatch.start();
-            }
+            stopWatch.start();
             returnedValue = joinPoint.proceed();
         } finally {
-            if (stopWatch.isRunning()) {
-                stopWatch.stop();
-            }
-            addStatistic(joinPoint);
+            stopWatch.stop();
         }
         return returnedValue;
     }
 
-    private void addStatistic(JoinPoint joinPoint) {
+    private StopWatch getCurrentStopWatch(JoinPoint joinPoint) {
         String serviceName = joinPoint.getSignature().getDeclaringType().getSimpleName();
-        serviceProfilingMap.merge(serviceName, stopWatch.getLastTaskTimeMillis(), Long::sum);
+        if (serviceProfilingMap.containsKey(serviceName)) {
+            return serviceProfilingMap.get(serviceName);
+        }
+        StopWatch stopWatch = new StopWatch();
+        serviceProfilingMap.put(serviceName, stopWatch);
+        return stopWatch;
     }
 
 }
