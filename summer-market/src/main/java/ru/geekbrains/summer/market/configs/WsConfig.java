@@ -23,7 +23,7 @@ public class WsConfig {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-    // http://localhost:8080/ws/products.wsdl
+    // http://localhost:8080/summer/ws/products.wsdl
     @Bean(name = "products")
     public DefaultWsdl11Definition productsWsdl11Definition(XsdSchema productsSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
