@@ -11,7 +11,7 @@
     <xs:element name="getProductsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="products" maxOccurs="unbounded" type="tns:product"/>
+                <xs:element name="products" maxOccurs="unbounded" type="tns:productSoap"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -27,12 +27,12 @@
     <xs:element name="getProductByIdResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="product" type="tns:product"/>
+                <xs:element name="product" type="tns:productSoap"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="product">
+    <xs:complexType name="productSoap">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="title" type="xs:string"/>

@@ -1,19 +1,40 @@
 package ru.geekbrains.summer.market.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 import ru.geekbrains.summer.market.model.Product;
+import ru.geekbrains.summer.market.soap.GetProductByIdResponse;
+import ru.geekbrains.summer.market.soap.GetProductsResponse;
+import ru.geekbrains.summer.market.soap.ProductSoap;
 
-@Mapper(componentModel = "spring")
-public interface SoapMapper {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    SoapMapper INSTANCE = Mappers.getMapper(SoapMapper.class);
+@Component
+public class SoapMapper {
 
-    @Mapping(target = "product", source = ".")
-    objects.GetProductByIdResponse toGetProductResponse(Product product);
+    public GetProductByIdResponse toGetProductResponse(Product product) {
+        GetProductByIdResponse getProductByIdResponse = new GetProductByIdResponse();
+        ProductSoap productSoap = toProduct(product);
+        getProductByIdResponse.setProduct(productSoap);
+        return getProductByIdResponse;
+    }
 
-    @Mapping(target = "categoryTitle", source = "category.title")
-    objects.Product toProduct(Product product);
+    public GetProductsResponse toGetProductsResponse(List<Product> productList) {
+        List<ProductSoap> productSoapList = productList.stream()
+                .map(this::toProduct)
+                .collect(Collectors.toList());
+        GetProductsResponse getProductsResponse = new GetProductsResponse();
+        getProductsResponse.getProducts().addAll(productSoapList);
+        return getProductsResponse;
+    }
+
+    private ProductSoap toProduct(Product product) {
+        ProductSoap productSoap = new ProductSoap();
+        productSoap.setId(product.getId());
+        productSoap.setPrice(product.getPrice().doubleValue());
+        productSoap.setTitle(product.getTitle());
+        productSoap.setCategoryTitle(product.getCategory().getTitle());
+        return productSoap;
+    }
 
 }
