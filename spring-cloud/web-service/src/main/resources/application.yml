@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /cloud
+  port: 8189
+spring:
+  application:
+    name: web
+eureka:
+  client:
+    fetch-registry: true
+   # register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    hostname: localhost
+
