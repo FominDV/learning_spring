@@ -5,7 +5,7 @@
     <artifactId>eureka-service</artifactId>
     <parent>
         <groupId>ru.fomin</groupId>
-        <artifactId>spring-cloud-f</artifactId>
+        <artifactId>spring-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
