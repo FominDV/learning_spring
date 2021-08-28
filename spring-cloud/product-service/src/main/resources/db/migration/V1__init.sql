@@ -11,5 +11,5 @@ values ('Milk', 33.4),
        ('Bread', 44),
        ('Pasta', 55.99),
        ('Potato', 193.3),
-       ('Appale', 19.5);
+       ('Apple', 19.5);
 

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductDto {
 
-    long id;
+    Long id;
     String title;
     BigDecimal price;
 
