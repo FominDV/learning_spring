@@ -4,10 +4,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.fomin.dto.ProductDto;
 
+import java.util.List;
+
 @FeignClient("product-service")
 public interface ProductClient {
 
     @GetMapping("/products")
-    List<ProductDto> getProducts()
+    List<ProductDto> getProducts();
 
 }
