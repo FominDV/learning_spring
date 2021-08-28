@@ -2,7 +2,7 @@
 <html ng-app="app" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Summer Market</title>
+    <title>Products</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,7 +16,28 @@
 <body ng-controller="indexController">
 <div class="container">
 
-<h1 align="center">PRODUCTS</h1>
+    <h1 align="center">PRODUCTS</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in products">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td>
+                <!--                <button class="btn btn-danger" ng-click="addToCart(p.id)">Delete</button>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <script src="index.js"></script>
 
