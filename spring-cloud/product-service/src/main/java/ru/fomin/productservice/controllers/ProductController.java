@@ -4,9 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.fomin.dto.ProductDto;
 import ru.fomin.productservice.services.ProductService;
 
@@ -27,6 +25,11 @@ public class ProductController {
         return productService.findAllProducts().stream()
                 .map(product -> conversionService.convert(product, ProductDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.remove(id);
     }
 
 }

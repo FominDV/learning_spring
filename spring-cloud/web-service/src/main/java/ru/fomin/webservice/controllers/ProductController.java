@@ -3,9 +3,7 @@ package ru.fomin.webservice.controllers;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.fomin.dto.ProductDto;
 import ru.fomin.webservice.clients.ProductClient;
 
@@ -22,6 +20,11 @@ public class ProductController {
     @GetMapping
     public List<ProductDto> getProducts() {
         return productClient.getProducts();
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productClient.deleteProduct(id);
     }
 
 }

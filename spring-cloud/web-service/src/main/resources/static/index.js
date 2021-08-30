@@ -1,5 +1,5 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/cloud/api/v1/products';
+    const contextPath = 'http://localhost:8189/cloud/api/v1/products/';
 
     $scope.getProducts = function () {
         $http({
@@ -11,8 +11,10 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     }
 
     $scope.remove = function (id) {
-        $http.delete(contextPath + '/delete/' + id)
-            .then(function () {
+        $http({
+            url: contextPath + id,
+            method: 'DELETE'
+        }).then(function () {
                 $scope.getProducts();
             });
     }

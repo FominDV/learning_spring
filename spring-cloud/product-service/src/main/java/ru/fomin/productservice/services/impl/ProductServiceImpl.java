@@ -22,4 +22,9 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    @Override
+    public void remove(Long id) {
+        productRepository.deleteById(id);
+    }
+
 }
