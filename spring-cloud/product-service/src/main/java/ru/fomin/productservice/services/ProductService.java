@@ -10,4 +10,6 @@ public interface ProductService {
 
     void remove(Long id);
 
+    Product createOrUpdate(Product product);
+
 }

@@ -27,4 +27,9 @@ public class ProductController {
         productClient.deleteProduct(id);
     }
 
+    @PostMapping
+    public ProductDto createProduct(@ModelAttribute ProductDto productDto) {
+        return productClient.createProduct(productDto);
+    }
+
 }

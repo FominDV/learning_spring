@@ -19,6 +19,21 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     }
 
+    $scope.createProduct=function (){
+        $http({
+            url: contextPath,
+            method: 'POST',
+            params: {
+                title: $scope.product.title,
+                price: $scope.product.price
+            }
+        }).then(function successCallback(response) {
+            alert('New product was created successful');
+            $scope.product = null;
+            $scope.getProducts();
+        });
+    }
+
     $scope.getProducts();
 
 });

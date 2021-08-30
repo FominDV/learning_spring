@@ -39,6 +39,23 @@
         </tbody>
     </table>
 
+    <h3 align="center">CREATE PRODUCT</h3>
+    <form novalidate ng-submit="createProduct()">
+        <div class="form-group col-md-6">
+            <label for="titleField">Title</label>
+            <input class="form-control" type="text" ng-model="product.title" id="titleField">
+        </div>
+        <p></p>
+        <div class="form-group col-md-6">
+            <label for="priceField">Price</label>
+            <input class="form-control" type="number" step="0.01" max="999999" ng-model="product.price" id="priceField">
+        </div>
+        <p></p>
+        <div>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>
+
     <script src="index.js"></script>
 
 </div>
