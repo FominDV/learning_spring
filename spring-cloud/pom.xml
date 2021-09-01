@@ -9,6 +9,8 @@
         <module>web-service</module>
         <module>product-dto</module>
         <module>product-service</module>
+        <module>gateway-server</module>
+
     </modules>
 
     <parent>

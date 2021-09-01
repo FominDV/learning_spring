@@ -1,5 +1,5 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/cloud/api/v1/products/';
+    const contextPath = 'http://localhost:8180/products/';
 
     $scope.getProducts = function () {
         $http({
