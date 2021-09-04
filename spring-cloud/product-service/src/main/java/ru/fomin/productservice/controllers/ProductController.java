@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.DELETE, RequestMethod.GET})
 public class ProductController {
 
     final ProductService productService;
