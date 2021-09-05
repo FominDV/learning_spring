@@ -6,3 +6,5 @@ spring:
       server:
         git:
           uri: https://github.com/FominDV/spring-cloud-configs.git
+  application:
+    name: config-server
