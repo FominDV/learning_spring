@@ -10,6 +10,7 @@
         <module>product-dto</module>
         <module>product-service</module>
         <module>gateway-server</module>
+        <module>config</module>
 
     </modules>
 
