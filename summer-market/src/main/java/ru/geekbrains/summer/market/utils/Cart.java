@@ -43,8 +43,10 @@ public class Cart {
     }
 
     public void add(Product product) {
-        items.add(new OrderItemDto(product));
-        recalculate();
+        if (!add(product.getId())) {
+            items.add(new OrderItemDto(product));
+            recalculate();
+        }
     }
 
     private void recalculate() {
