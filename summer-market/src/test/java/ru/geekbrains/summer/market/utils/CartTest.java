@@ -82,8 +82,15 @@ class CartTest {
 
     @ParameterizedTest
     @ValueSource(longs = {1L,2L})
-    public void remove(Long productId){
+    public void remove_availableId(Long productId){
+        cart.remove(productId);
+        assertEquals(1, cart.getItems().size());
+    }
 
+    @Test
+    public void remove_unavailableId(){
+        cart.remove(3L);
+        assertEquals(2, cart.getItems().size());
     }
 
     private OrderItemDto getOrderItemDto(Long productId, String productTitle, double productPrice, int quantity) {
