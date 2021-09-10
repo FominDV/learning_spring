@@ -2,7 +2,6 @@ package ru.geekbrains.summer.market.utils;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -43,7 +42,7 @@ class CartTest {
         orderItemDtoList.add(getOrderItemDto(2L, "Potato", 65.99, quantityItem2));
         price = calculateTotalPrice();
         cart.setItems(new ArrayList<>(orderItemDtoList));
-        cart.setPrice(price);
+        cart.setPrice(new BigDecimal(price.doubleValue()));
     }
 
     @Test
@@ -81,16 +80,34 @@ class CartTest {
     }
 
     @ParameterizedTest
-    @ValueSource(longs = {1L,2L})
-    public void remove_availableId(Long productId){
+    @ValueSource(longs = {1L, 2L})
+    public void remove_availableId(Long productId) {
+        BigDecimal expectedPrice = price.subtract(getFullPriceById(productId));
         cart.remove(productId);
         assertEquals(1, cart.getItems().size());
+        assertEquals(expectedPrice, cart.getPrice().setScale(2));
     }
 
     @Test
-    public void remove_unavailableId(){
+    public void remove_unavailableId() {
         cart.remove(3L);
         assertEquals(2, cart.getItems().size());
+        assertEquals(price, cart.getPrice());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1, 2, true",
+            "2, 2, true",
+            "3, 2, false"
+    })
+    public void changeQuantity(Long productId, int amount, boolean expectedResult) {
+        int expectedQuantity = getStartQuantity(productId) + amount;
+        boolean actualResult = cart.changeQuantity(productId, amount);
+        assertEquals(expectedResult, actualResult);
+        if (expectedResult) {
+            assertEquals(expectedQuantity, getQuantityById(productId));
+        }
     }
 
     private OrderItemDto getOrderItemDto(Long productId, String productTitle, double productPrice, int quantity) {
@@ -146,6 +163,10 @@ class CartTest {
         product.setTitle(title);
         product.setPrice(BigDecimal.valueOf(price));
         return product;
+    }
+
+    private BigDecimal getFullPriceById(Long productId) {
+        return getPriceById(productId).multiply(BigDecimal.valueOf(getQuantityById(productId)));
     }
 
     private Stream<Product> getArgumentsForAdd_byProductTest() {
