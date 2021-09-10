@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import ru.geekbrains.summer.market.TestUtil;
 import ru.geekbrains.summer.market.dto.OrderItemDto;
 import ru.geekbrains.summer.market.model.Product;
 
@@ -38,8 +39,8 @@ class CartTest {
     @BeforeEach
     public void prepare() {
         orderItemDtoList = new ArrayList<>();
-        orderItemDtoList.add(getOrderItemDto(1L, "Milk", 34.5, quantityItem1));
-        orderItemDtoList.add(getOrderItemDto(2L, "Potato", 65.99, quantityItem2));
+        orderItemDtoList.add(TestUtil.getOrderItemDto(1L, "Milk", 34.5, quantityItem1));
+        orderItemDtoList.add(TestUtil.getOrderItemDto(2L, "Potato", 65.99, quantityItem2));
         price = calculateTotalPrice();
         cart.setItems(new ArrayList<>(orderItemDtoList));
         cart.setPrice(new BigDecimal(price.doubleValue()));
@@ -108,17 +109,6 @@ class CartTest {
         if (expectedResult) {
             assertEquals(expectedQuantity, getQuantityById(productId));
         }
-    }
-
-    private OrderItemDto getOrderItemDto(Long productId, String productTitle, double productPrice, int quantity) {
-        BigDecimal pricePerProduct = BigDecimal.valueOf(productPrice);
-        OrderItemDto orderItemDto = new OrderItemDto();
-        orderItemDto.setProductId(productId);
-        orderItemDto.setProductTitle(productTitle);
-        orderItemDto.setPricePerProduct(pricePerProduct);
-        orderItemDto.setPrice(pricePerProduct.multiply(BigDecimal.valueOf(quantity)));
-        orderItemDto.setQuantity(quantity);
-        return orderItemDto;
     }
 
     private BigDecimal calculateTotalPrice() {
