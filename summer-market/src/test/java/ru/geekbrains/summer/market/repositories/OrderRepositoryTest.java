@@ -6,9 +6,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import ru.geekbrains.summer.market.model.Order;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@ActiveProfiles("Test")
 @DataJpaTest
 class OrderRepositoryTest {
 
@@ -19,7 +21,7 @@ class OrderRepositoryTest {
     private TestEntityManager entityManager;
 
     @Test
-    public void sava(){
+    public void save(){
 
     }
 
