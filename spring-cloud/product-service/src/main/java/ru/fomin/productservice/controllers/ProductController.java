@@ -9,11 +9,11 @@ import ru.fomin.dto.ProductDto;
 import ru.fomin.productservice.entities.Product;
 import ru.fomin.productservice.services.ProductService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/products")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductController {
@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductDto productDto) {
+    public ProductDto createProduct(@ModelAttribute ProductDto productDto) {
         Product product = productService.createOrUpdate(conversionService.convert(productDto, Product.class));
         return conversionService.convert(product, ProductDto.class);
     }

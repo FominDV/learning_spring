@@ -1,0 +1,38 @@
+version: '3'
+
+volumes:
+  postgres_products:
+    driver: local
+
+services:
+
+  postgres_products:
+    image: library/postgres:latest
+    container_name: cloud_product_db
+    volumes:
+      - type: volume
+        target: /var/lib/postgresql
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 1s
+      retries: 2
+
+  flyway:
+    image: boxfuse/flyway
+    command: -url=jdbc:postgresql://postgres_products:5432/products -user=postgres -password=postgres -connectRetries=60 migrate
+    volumes:
+      - ./../flyway:/flyway/sql
+    depends_on:
+      - postgres_products
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
