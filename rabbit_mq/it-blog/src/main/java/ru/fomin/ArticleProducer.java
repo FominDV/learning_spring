@@ -15,21 +15,20 @@ public class ArticleProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleProducer.class);
     private static final String MESSAGE_PATTERN = "^\\S{2,} .+";
-    private static final String EXCHANGE_NAME = "ArticleDirect";
     private static final String MESSAGE_INFO_EXIT = "For exit input \"stop\"";
     private static final String MESSAGE_INFO_CREATE_ARTICLE = "For creating new article you should input topic, one space and article text.";
     private static final String MESSAGE_INFO_BAD_MESSAGE = "Invalid message was input.";
     private static final String MESSAGE_INFO_ARTICLE_WAS_SENT = "The article which has topic \"%s\" and message \"%s\" was sent successfully.";
 
     public void execute() {
-        readInputMessages(new MqObjectsCreator().getFactory());
+        readInputMessages(MqUtil.getFactory());
     }
 
     private void readInputMessages(ConnectionFactory factory) {
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel();
              Scanner scanner = new Scanner(System.in)) {
-            channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+            channel.exchangeDeclare(MqUtil.EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
             LOGGER.info(MESSAGE_INFO_CREATE_ARTICLE);
             while (true) {
                 LOGGER.info(MESSAGE_INFO_EXIT);
@@ -59,7 +58,7 @@ public class ArticleProducer {
 
     private void publish(String topic, String message, Channel channel) {
         try {
-            channel.basicPublish(EXCHANGE_NAME, topic, null, message.getBytes("UTF-8"));
+            channel.basicPublish(MqUtil.EXCHANGE_NAME, topic, null, message.getBytes("UTF-8"));
             LOGGER.info(String.format(MESSAGE_INFO_ARTICLE_WAS_SENT, topic, message));
         } catch (IOException e) {
             LOGGER.error("error", e);
