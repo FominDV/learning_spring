@@ -16,11 +16,11 @@ public class ArticleConsumer {
     private static final String COMMAND_PATTERN = "^(" + COMMAND_SET + "|" + COMMAND_REMOVE + ") .+$";
     private static final String MESSAGE_INFO_MANAGE_SUBSCRIPTION = String.format("For adding subscription input \"%s\", one space and topic name.\nFor removing subscription input \"%s\", one space and topic name.", COMMAND_SET, COMMAND_REMOVE);
     private static final String MESSAGE_INFO_BAD_COMMAND = "Invalid command was input";
-    private static final String MESSAGE_INFO_NEW_ARTICLE = "New article about \"%s\" has text: %s\n";
+    private static final String MESSAGE_INFO_NEW_ARTICLE = "New article: %s\n";
 
     private DeliverCallback deliverCallback = (consumerTag, delivery) -> {
         String message = new String(delivery.getBody(), "UTF-8");
-        System.out.printf(MESSAGE_INFO_NEW_ARTICLE, consumerTag, message);
+        System.out.printf(MESSAGE_INFO_NEW_ARTICLE, message);
     };
 
     public void execute() throws IOException, TimeoutException {

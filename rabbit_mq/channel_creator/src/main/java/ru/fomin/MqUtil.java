@@ -15,8 +15,7 @@ public class MqUtil {
     public static ConnectionFactory getFactory() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        factory.setPassword("admin");
-        factory.setUsername("admin");
+
         return factory;
     }
 
