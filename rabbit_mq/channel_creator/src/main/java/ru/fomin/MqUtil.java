@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 public class MqUtil {
 
-    public static final String EXCHANGE_NAME = "ArticleDirect";
+    public static final String EXCHANGE_NAME = "ArticleDirect2";
 
     public static ConnectionFactory getFactory() {
         ConnectionFactory factory = new ConnectionFactory();

@@ -2,8 +2,6 @@ package ru.fomin;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -26,14 +24,15 @@ public class ArticleConsumer {
     public void execute() throws IOException, TimeoutException {
         Channel channel = MqUtil.getChannel();
         String queueName = MqUtil.getQueue(channel);
-        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
+        channel.basicConsume(queueName, true, deliverCallback, consumerTag -> {
+        });
+        System.out.println(MESSAGE_INFO_MANAGE_SUBSCRIPTION);
         readCommands(channel, queueName);
     }
 
     private void readCommands(Channel channel, String queueName) throws IOException, TimeoutException {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
-                System.out.println(MESSAGE_INFO_MANAGE_SUBSCRIPTION);
                 processCommand(scanner.nextLine(), channel, queueName);
             }
         }
@@ -45,7 +44,7 @@ public class ArticleConsumer {
             return;
         }
         int indexFirstSpace = command.indexOf(" ");
-        String topic = command.substring(indexFirstSpace);
+        String topic = command.substring(indexFirstSpace + 1);
         switch (command.substring(0, indexFirstSpace)) {
             case COMMAND_SET:
                 channel.queueBind(queueName, MqUtil.EXCHANGE_NAME, topic);
