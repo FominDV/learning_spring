@@ -65,7 +65,6 @@ angular.module('app').controller('indexController', function ($rootScope, $locat
 
                     $http.get(contextPath + '/cart/' + $localStorage.guestCartUuid + '/merge')
                         .then(function successCallback(response) {
-                            $localStorage.guestCartUuid = response.data.value;
                         });
                 }
             }, function errorCallback(response) {

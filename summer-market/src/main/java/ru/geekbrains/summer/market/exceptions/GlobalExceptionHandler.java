@@ -16,4 +16,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> catchInvalidInputDataException(InvalidInputDataException e) {
         return new ResponseEntity<>(new MarketError(e.getMessages()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<?> catchExecuteOperationException(ExecuteOperationException e) {
+        return new ResponseEntity<>(new MarketError(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
