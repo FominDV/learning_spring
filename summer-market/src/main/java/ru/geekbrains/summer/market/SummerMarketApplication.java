@@ -2,24 +2,28 @@ package ru.geekbrains.summer.market;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
+@PropertySource("classpath:secret.properties")
 public class SummerMarketApplication {
 	// Домашнее задание:
-	// 1. Добавить фильтр по максимальной цене
-	// 2. Убрать построение спецификаций куда-нибудь из контроллера
-	// 3. * Добавить форму фильтра на фронт
+	// 1. Исследовательская задача: прикрутить картинки к товарам
 
 	// План по магазину:
-	// 1. Привязка корзины к пользователю, подключение Reddis
-	// 2. Рассылка писем
-	// 3. Админка
-	// 4. Swagger
-	// + 5. Фильтры по товарам
-	// 6. Маппинг DTO <-> Entity, @EntityGraph
-	// 7. Картинки
-	// 8. Промо-коды
-	// 9.
+
+	// Занятие 11:
+	// - Swagger
+	// - Платежная система (PayPal)
+	// - Картинки
+
+	// Занятие 12:
+	// - KeyCloak
+	// - Регистрация
+
+	// - Рассылка писем
+	// - Админка
+	// - Промо-коды
 
 	public static void main(String[] args) {
 		SpringApplication.run(SummerMarketApplication.class, args);

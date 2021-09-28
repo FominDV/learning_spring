@@ -13,15 +13,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Component
-@NoArgsConstructor
 @Data
 public class Cart {
     private List<OrderItemDto> items;
     private BigDecimal price;
 
-    @PostConstruct
-    public void init() {
+    public Cart() {
         this.items = new ArrayList<>();
         this.price = BigDecimal.ZERO;
     }
@@ -43,10 +40,8 @@ public class Cart {
     }
 
     public void add(Product product) {
-        if (!add(product.getId())) {
-            items.add(new OrderItemDto(product));
-            recalculate();
-        }
+        items.add(new OrderItemDto(product));
+        recalculate();
     }
 
     private void recalculate() {
@@ -75,5 +70,23 @@ public class Cart {
             }
         }
         return false;
+    }
+
+    public void merge(Cart another) {
+        for (OrderItemDto anotherItem : another.items) {
+            boolean merged = false;
+            for (OrderItemDto myItem : items) {
+                if (myItem.getProductId().equals(anotherItem.getProductId())) {
+                    myItem.changeQuantity(anotherItem.getQuantity());
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                items.add(anotherItem);
+            }
+        }
+        recalculate();
+        another.clear();
     }
 }
